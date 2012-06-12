@@ -72,8 +72,34 @@ senha VARCHAR(12) NOT NULL ,\
 PRIMARY KEY (cpf) ,\
 UNIQUE INDEX cpf_UNIQUE (cpf) );")
 
-def createAluno():
-    pass
+def createAluno(cpf , data_nascimento, sexo, nome, mae, cep,\
+                numero, endereco, bairro, cidade, uf, matricula, \
+                departamento , curso, ano_conclusao,\
+                estagiando, telefone, celular, senha, pai = None, \
+                complemento = None, email= None, manha = None, tarde = None, noite = None):
+    cursor.execute("INSERT INTO Aluno(cpf, data_nascimento, sexo, nome, mae, pai, cep, \
+                    numero, complemento, endereco, bairro, cidade, uf, matricula, departamento, \
+                    curso, ano_conclusao, estagiando, manha, tarde, noite, email, telefone, \
+                    celular, senha) VALUES ('%s', '%s', '%s', '%s', '%s', pai, '%s', \
+                    '%s', complemento, '%s', '%s', '%s', '%s', '%s', '%s', \
+                    '%s', '%s', '%s', manha, tarde, noite, email, '%s', \
+                    '%s', '%s')  ; " %(str(cpf), str(data_nascimento), str(sexo), str(nome), str(mae), str(cep), \
+                    str(numero), str(endereco), str(bairro), str(cidade), str(uf), str(matricula), str(departamento), \
+                    str(curso), str(ano_conclusao), str(estagiando), str(telefone), \
+                    str(celular), str(senha)))
+
+    if pai != None:
+        cursor.execute("UPDATE Aluno SET pai = '%s' WHERE cpf = '%s';" %(str(pai), str(cpf)))
+    if complemento != None:
+        cursor.execute("UPDATE Aluno SET complemento = '%s' WHERE cpf = '%s';" %(str(complemento), str(cpf)))
+    if manha != None:
+        cursor.execute("UPDATE Aluno SET manha = '%s' WHERE cpf = '%s';" %(str(manha), str(cpf)))
+    if tarde != None:
+        cursor.execute("UPDATE Aluno SET tarde = '%s' WHERE cpf = '%s';" %(str(tarde), str(cpf)))
+    if noite != None:
+        cursor.execute("UPDATE Aluno SET noite = '%s' WHERE cpf = '%s';" %(str(noite), str(cpf)))
+    if email != None:
+        cursor.execute("UPDATE Aluno SET email = '%s' WHERE cpf = '%s';" %(str(email), str(cpf)))
 
 def createFuncionario():
     pass
