@@ -1,0 +1,6 @@
+Database: estagioifpe
+Username: desenvolvedor
+password: passestagioifpe
+Allowed IPs: %
+Collation: latin1_bin
+Email: flavindias@msn.com
