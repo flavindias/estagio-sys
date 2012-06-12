@@ -81,7 +81,7 @@ class frameEdicaoEmpresa(wx.Frame):
               parent=self.painelCadastro, pos=wx.Point(8, 8), size=wx.Size(175,
               70), style=0)
 
-        self.linhaEdicaoEmpresas = wx.StaticBitmap(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Modelagem a Programa\xe7\xe3o Orientada a Objetos/Projeto Estagio/Code/System/Graficos/LinhaEdicaoEmpresas.png',
+        self.linhaEdicaoEmpresas = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/LinhaEdicaoEmpresas.png',
               wx.BITMAP_TYPE_PNG),
               id=wxID_FRAMEEDICAOEMPRESALINHAEDICAOEMPRESAS,
               name=u'linhaEdicaoEmpresas', parent=self.painelCadastro,
@@ -130,7 +130,7 @@ class frameEdicaoEmpresa(wx.Frame):
               size=wx.Size(14, 14), style=0)
         self.cnpjValido.Show(False)
 
-        self.carregarCNPJ = wx.BitmapButton(bitmap=wx.Bitmap(u'C:/Users/Flavindias/Desenvolvimento/Modelagem a Programa\xe7\xe3o Orientada a Objetos/Projeto Estagio/Code/System/Graficos/botao_carregar.png',
+        self.carregarCNPJ = wx.BitmapButton(bitmap=wx.Bitmap(u'./Graficos/botao_carregar.png',
               wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEDICAOEMPRESACARREGARCNPJ,
               name=u'carregarCNPJ', parent=self.abaPessoal, pos=wx.Point(243,
               30), size=wx.Size(26, 26), style=wx.BU_AUTODRAW)

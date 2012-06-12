@@ -9,8 +9,6 @@ import urllib
 import cgi
 import bridge
 
-departamentos = {'DACI': [None], 'DAFG': [None], 'DAIC': [None], 'DASE' : ["ANALISE E DESENVOLVIMENTO DE SISTEMAS", "ELETRONICA", "ELETROTECNICA", "TELECOMUNICACOES"], 'DASS' : [None], 'DGTI' : [None], 'DIAP' : [None]}
-listdepartamentos = departamentos.keys()
 
 def create(parent):
     return frameExclusaoAluno(parent)
