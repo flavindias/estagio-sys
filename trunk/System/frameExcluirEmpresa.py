@@ -1,4 +1,4 @@
-#Boa:Frame:frameExclusaoFuncionarios
+#Boa:Frame:frameExclusaoEmpresas
 #! /usr/bin/env python
 #-*-coding: latin1-*-
 #-*-coding: iso-8859-1-*-  
@@ -13,134 +13,137 @@ departamentos = {'DACI': [None], 'DAFG': [None], 'DAIC': [None], 'DASE' : ["ANAL
 listdepartamentos = departamentos.keys()
 
 def create(parent):
-    return frameExclusaoFuncionarios(parent)
+    return frameExclusaoEmpresas(parent)
 
-[wxID_FRAMEEXCLUSAOFUNCIONARIOS, wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOEXCLUIR, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOVOLTAR, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSBUSCARLOGIN, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOLOGIN, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOLOGINFUNCIONARIO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPONOMEFUNCIONARIO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOSENHA, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCPFENCONTRADO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSCPFNAOENCONTRADO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSLINHAEXCLUSAOFUNCIONAIOS, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSLOGOIFPE, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMEERRO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMELOGIN, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMELOGINFUNCIONARIO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMENOMEALUNO, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMESENHA, 
- wxID_FRAMEEXCLUSAOFUNCIONARIOSPAINELEXCLUIR, 
+[wxID_FRAMEEXCLUSAOEMPRESAS, wxID_FRAMEEXCLUSAOEMPRESASBOTAOEXCLUIR, 
+ wxID_FRAMEEXCLUSAOEMPRESASBOTAOVOLTAR, wxID_FRAMEEXCLUSAOEMPRESASBUSCARCPF, 
+ wxID_FRAMEEXCLUSAOEMPRESASCAMPOCPF, wxID_FRAMEEXCLUSAOEMPRESASCAMPOLOGIN, 
+ wxID_FRAMEEXCLUSAOEMPRESASCAMPONOMEEMPRESA, 
+ wxID_FRAMEEXCLUSAOEMPRESASCAMPOSENHA, 
+ wxID_FRAMEEXCLUSAOEMPRESASCPFENCONTRADO, 
+ wxID_FRAMEEXCLUSAOEMPRESASCPFNAOENCONTRADO, 
+ wxID_FRAMEEXCLUSAOEMPRESASLINHAEXCLUSAOEMPRESA, 
+ wxID_FRAMEEXCLUSAOEMPRESASLOGOIFPE, wxID_FRAMEEXCLUSAOEMPRESASNOMECPF, 
+ wxID_FRAMEEXCLUSAOEMPRESASNOMEERRO, wxID_FRAMEEXCLUSAOEMPRESASNOMELOGIN, 
+ wxID_FRAMEEXCLUSAOEMPRESASNOMENOMEEMPRESA, 
+ wxID_FRAMEEXCLUSAOEMPRESASNOMESENHA, wxID_FRAMEEXCLUSAOEMPRESASPAINELEXCLUIR, 
 ] = [wx.NewId() for _init_ctrls in range(18)]
 
-class frameExclusaoFuncionarios(wx.Frame):
+class frameExclusaoEmpresas(wx.Frame):
     def _init_ctrls(self, prnt):
         # generated method, don't edit
-        wx.Frame.__init__(self, id=wxID_FRAMEEXCLUSAOFUNCIONARIOS,
-              name=u'frameExclusaoFuncionarios', parent=prnt, pos=wx.Point(700,
+        wx.Frame.__init__(self, id=wxID_FRAMEEXCLUSAOEMPRESAS,
+              name=u'frameExclusaoEmpresas', parent=prnt, pos=wx.Point(700,
               273), size=wx.Size(1040, 614), style=wx.DEFAULT_FRAME_STYLE,
-              title=u'Est\xe1gio Curricular - Exclus\xe3o de Funcion\xe1rios')
+              title=u'Est\xe1gio Curricular - Exclus\xe3o de Empresas')
         self.SetClientSize(wx.Size(1024, 576))
         self.Center(wx.BOTH)
         self.SetIcon(wx.Icon(u'./Graficos/icone.ico',wx.BITMAP_TYPE_ICO))
         self.SetMaxSize(wx.Size(1040, 614))
         self.SetMinSize(wx.Size(1040, 614))
 
-        self.painelExcluir = wx.Panel(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSPAINELEXCLUIR,
+        self.painelExcluir = wx.Panel(id=wxID_FRAMEEXCLUSAOEMPRESASPAINELEXCLUIR,
               name=u'painelExcluir', parent=self, pos=wx.Point(0, 0),
               size=wx.Size(1024, 576), style=wx.TAB_TRAVERSAL)
         self.painelExcluir.SetBackgroundColour(wx.Colour(255, 255, 255))
 
         self.logoIFPE = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/logo.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOFUNCIONARIOSLOGOIFPE,
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOEMPRESASLOGOIFPE,
               name=u'logoIFPE', parent=self.painelExcluir, pos=wx.Point(8, 8),
               size=wx.Size(175, 70), style=0)
 
-        self.campoLoginFuncionario = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOLOGINFUNCIONARIO,
-              name=u'campoLoginFuncionario', parent=self.painelExcluir,
-              pos=wx.Point(24, 140), size=wx.Size(240, 20), style=0, value=u'')
-        self.campoLoginFuncionario.SetMaxLength(50)
+        self.nomeCPF = wx.StaticText(id=wxID_FRAMEEXCLUSAOEMPRESASNOMECPF,
+              label=u'CPF:', name=u'nomeCPF', parent=self.painelExcluir,
+              pos=wx.Point(11, 122), size=wx.Size(24, 13), style=0)
 
-        self.nomeLoginFuncionario = wx.StaticText(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMELOGINFUNCIONARIO,
-              label=u'Login do Funcion\xe1rios:', name=u'nomeLoginFuncionario',
-              parent=self.painelExcluir, pos=wx.Point(11, 122),
-              size=wx.Size(108, 13), style=0)
+        self.campoCPF = wx.lib.masked.textctrl.TextCtrl(id=wxID_FRAMEEXCLUSAOEMPRESASCAMPOCPF,
+              name=u'campoCPF', parent=self.painelExcluir, pos=wx.Point(24,
+              141), size=wx.Size(104, 21), style=0, value=u'')
+        self.campoCPF.SetMask(u'XXX.XXX.XXX-XX')
+        self.campoCPF.SetAutoformat('')
+        self.campoCPF.SetFormatcodes('')
+        self.campoCPF.SetDescription('')
+        self.campoCPF.SetExcludeChars('')
+        self.campoCPF.SetValidRegex('')
+        self.campoCPF.SetMaxLength(14)
+        self.campoCPF.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL, False,
+              u'Tahoma'))
+        self.campoCPF.SetDefaultEncoding(u'latin1')
+        self.campoCPF.SetFillChar(u' ')
 
-        self.linhaExclusaoFuncionaios = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/LinhaExclusaoFuncionario.png',
+        self.linhaExclusaoEmpresa = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/LinhaExclusaoEmpresa.png',
               wx.BITMAP_TYPE_PNG),
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSLINHAEXCLUSAOFUNCIONAIOS,
-              name=u'linhaExclusaoFuncionaios', parent=self.painelExcluir,
-              pos=wx.Point(0, 80), size=wx.Size(1024, 25), style=0)
+              id=wxID_FRAMEEXCLUSAOEMPRESASLINHAEXCLUSAOEMPRESA,
+              name=u'linhaExclusaoEmpresa', parent=self.painelExcluir,
+              pos=wx.Point(0, 80), size=wx.Size(1024, 26), style=0)
 
         self.cpfEncontrado = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/botao_valido.png',
-              wx.BITMAP_TYPE_PNG),
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCPFENCONTRADO,
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOEMPRESASCPFENCONTRADO,
               name=u'cpfEncontrado', parent=self.painelExcluir,
-              pos=wx.Point(309, 143), size=wx.Size(14, 14), style=0)
+              pos=wx.Point(170, 143), size=wx.Size(14, 14), style=0)
         self.cpfEncontrado.Show(False)
 
         self.cpfNaoEncontrado = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/botao_invalido.png',
               wx.BITMAP_TYPE_PNG),
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCPFNAOENCONTRADO,
+              id=wxID_FRAMEEXCLUSAOEMPRESASCPFNAOENCONTRADO,
               name=u'cpfNaoEncontrado', parent=self.painelExcluir,
-              pos=wx.Point(309, 143), size=wx.Size(14, 14), style=0)
+              pos=wx.Point(170, 143), size=wx.Size(14, 14), style=0)
         self.cpfNaoEncontrado.Show(False)
 
-        self.BuscarLogin = wx.BitmapButton(bitmap=wx.Bitmap(u'./Graficos/botao_carregar.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBUSCARLOGIN,
-              name=u'BuscarLogin', parent=self.painelExcluir, pos=wx.Point(273,
+        self.BuscarCPF = wx.BitmapButton(bitmap=wx.Bitmap(u'./Graficos/botao_carregar.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOEMPRESASBUSCARCPF,
+              name=u'BuscarCPF', parent=self.painelExcluir, pos=wx.Point(134,
               137), size=wx.Size(26, 26), style=wx.BU_AUTODRAW)
-        self.BuscarLogin.Bind(wx.EVT_BUTTON, self.OnBuscarCPFButton,
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBUSCARLOGIN)
+        self.BuscarCPF.Bind(wx.EVT_BUTTON, self.OnBuscarCPFButton,
+              id=wxID_FRAMEEXCLUSAOEMPRESASBUSCARCPF)
 
-        self.nomeNomeAluno = wx.StaticText(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMENOMEALUNO,
-              label=u'Nome do Funcion\xe1rio:', name=u'nomeNomeAluno',
-              parent=self.painelExcluir, pos=wx.Point(11, 177),
-              size=wx.Size(105, 13), style=0)
+        self.nomeNomeEmpresa = wx.StaticText(id=wxID_FRAMEEXCLUSAOEMPRESASNOMENOMEEMPRESA,
+              label=u'Nome da Empresa:', name=u'nomeNomeEmpresa',
+              parent=self.painelExcluir, pos=wx.Point(11, 177), size=wx.Size(91,
+              13), style=0)
 
-        self.campoNomeFUncionario = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPONOMEFUNCIONARIO,
-              name=u'campoNomeFUncionario', parent=self.painelExcluir,
+        self.campoNomeEmpresa = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOEMPRESASCAMPONOMEEMPRESA,
+              name=u'campoNomeEmpresa', parent=self.painelExcluir,
               pos=wx.Point(24, 196), size=wx.Size(496, 21),
               style=wx.TE_READONLY, value=u'')
-        self.campoNomeFUncionario.SetMaxLength(50)
+        self.campoNomeEmpresa.SetMaxLength(50)
 
-        self.nomeLogin = wx.StaticText(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMELOGIN,
+        self.nomeLogin = wx.StaticText(id=wxID_FRAMEEXCLUSAOEMPRESASNOMELOGIN,
               label=u'Login:', name=u'nomeLogin', parent=self.painelExcluir,
               pos=wx.Point(11, 228), size=wx.Size(30, 13), style=0)
 
-        self.campoLogin = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOLOGIN,
+        self.campoLogin = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOEMPRESASCAMPOLOGIN,
               name=u'campoLogin', parent=self.painelExcluir, pos=wx.Point(24,
               247), size=wx.Size(240, 21), style=0, value=u'')
         self.campoLogin.SetMaxLength(50)
 
-        self.nomeSenha = wx.StaticText(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMESENHA,
+        self.nomeSenha = wx.StaticText(id=wxID_FRAMEEXCLUSAOEMPRESASNOMESENHA,
               label=u'Senha:', name=u'nomeSenha', parent=self.painelExcluir,
               pos=wx.Point(11, 277), size=wx.Size(35, 13), style=0)
 
-        self.campoSenha = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSCAMPOSENHA,
+        self.campoSenha = wx.TextCtrl(id=wxID_FRAMEEXCLUSAOEMPRESASCAMPOSENHA,
               name=u'campoSenha', parent=self.painelExcluir, pos=wx.Point(24,
               296), size=wx.Size(240, 21), style=wx.TE_PASSWORD, value=u'')
         self.campoSenha.SetMaxLength(50)
 
-        self.nomeErro = wx.StaticText(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSNOMEERRO,
+        self.nomeErro = wx.StaticText(id=wxID_FRAMEEXCLUSAOEMPRESASNOMEERRO,
               label=u'', name=u'nomeErro', parent=self.painelExcluir,
               pos=wx.Point(576, 144), size=wx.Size(0, 13), style=0)
         self.nomeErro.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.BOLD, False,
               u'Tahoma'))
 
-        self.botaoExcluir = wx.Button(id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOEXCLUIR,
+        self.botaoExcluir = wx.Button(id=wxID_FRAMEEXCLUSAOEMPRESASBOTAOEXCLUIR,
               label=u'Excluir', name=u'botaoExcluir', parent=self.painelExcluir,
               pos=wx.Point(896, 520), size=wx.Size(75, 23), style=0)
         self.botaoExcluir.Bind(wx.EVT_BUTTON, self.OnBotaoExcluirButton,
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOEXCLUIR)
+              id=wxID_FRAMEEXCLUSAOEMPRESASBOTAOEXCLUIR)
 
         self.botaoVoltar = wx.BitmapButton(bitmap=wx.Bitmap(u'./Graficos/botao_voltar.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOVOLTAR,
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMEEXCLUSAOEMPRESASBOTAOVOLTAR,
               name=u'botaoVoltar', parent=self.painelExcluir, pos=wx.Point(952,
               13), size=wx.Size(57, 57), style=wx.BU_AUTODRAW)
         self.botaoVoltar.Bind(wx.EVT_BUTTON, self.OnBotaoVoltarButton,
-              id=wxID_FRAMEEXCLUSAOFUNCIONARIOSBOTAOVOLTAR)
+              id=wxID_FRAMEEXCLUSAOEMPRESASBOTAOVOLTAR)
 
     def __init__(self, parent):
         self._init_ctrls(parent)
