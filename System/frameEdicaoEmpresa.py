@@ -461,21 +461,6 @@ class frameEdicaoEmpresa(wx.Frame):
         
         event.Skip()
 
-    def OnValidarCNPJButton(self, event):
-        CNPJ = self.campoCNPJ.GetValue()
-        resultado = self.validar_cnpj(CNPJ)
-        
-        if resultado == False:
-            self.cnpjValido.Show(False)
-            self.cnpjInvalido.Show(True)
-            self.nomeErro.SetLabel('CNPJ Invalido')
-        else:
-            self.cnpjInvalido.Show(False)
-            self.cnpjValido.Show(True)
-            self.nomeErro.SetLabel('')
-            
-        event.Skip()
-
     def OnBotaoLimparEmpresarialButton(self, event):
         self.campoCNPJ.SetValue('')
         self.campoRazaoSocial.SetValue('')
@@ -507,5 +492,8 @@ class frameEdicaoEmpresa(wx.Frame):
         self.campoTelefone.SetValue('')
         self.campoCelular.SetValue('')
         
+        event.Skip()
+
+    def OnValidarCNPJButton(self, event):
         event.Skip()
 
