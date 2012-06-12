@@ -29,7 +29,7 @@ def create(parent):
  wxID_FRAMECADASTROEMPRESACAMPOEMAIL, wxID_FRAMECADASTROEMPRESACAMPOENDERECO, 
  wxID_FRAMECADASTROEMPRESACAMPOLOGIN, 
  wxID_FRAMECADASTROEMPRESACAMPONOMEFANTASIA, 
- wxID_FRAMECADASTROEMPRESACAMPONOMERESPOSAVEL, 
+ wxID_FRAMECADASTROEMPRESACAMPONOMERESPONSAVEL, 
  wxID_FRAMECADASTROEMPRESACAMPONUMERO, 
  wxID_FRAMECADASTROEMPRESACAMPORAZAOSOCIAL, 
  wxID_FRAMECADASTROEMPRESACAMPOSENHA, wxID_FRAMECADASTROEMPRESACAMPOSITE, 
@@ -42,7 +42,8 @@ def create(parent):
  wxID_FRAMECADASTROEMPRESANOMECNPJ, wxID_FRAMECADASTROEMPRESANOMECOMPLEMENTO, 
  wxID_FRAMECADASTROEMPRESANOMECONFIRMARSENHA, 
  wxID_FRAMECADASTROEMPRESANOMEEMAIL, wxID_FRAMECADASTROEMPRESANOMEENDERECO, 
- wxID_FRAMECADASTROEMPRESANOMEERRO, wxID_FRAMECADASTROEMPRESANOMELOGIN, 
+ wxID_FRAMECADASTROEMPRESANOMEERRO, wxID_FRAMECADASTROEMPRESANOMEERROSENHA, 
+ wxID_FRAMECADASTROEMPRESANOMELOGIN, 
  wxID_FRAMECADASTROEMPRESANOMENOMEFANTASIA, 
  wxID_FRAMECADASTROEMPRESANOMENOMERESPONSAVEL, 
  wxID_FRAMECADASTROEMPRESANOMENUMERO, 
@@ -50,7 +51,7 @@ def create(parent):
  wxID_FRAMECADASTROEMPRESANOMESITE, wxID_FRAMECADASTROEMPRESANOMETELEFONE, 
  wxID_FRAMECADASTROEMPRESANOMEUF, wxID_FRAMECADASTROEMPRESAPAINELCADASTRO, 
  wxID_FRAMECADASTROEMPRESAVALIDARCNPJ, 
-] = [wx.NewId() for _init_ctrls in range(54)]
+] = [wx.NewId() for _init_ctrls in range(55)]
 
 class frameCadastroEmpresa(wx.Frame):
     def _init_coll_dadosDosAlunos_Pages(self, parent):
@@ -212,10 +213,10 @@ class frameCadastroEmpresa(wx.Frame):
               parent=self.abaContato, pos=wx.Point(11, 18), size=wx.Size(92,
               13), style=0)
 
-        self.campoNomeResposavel = wx.TextCtrl(id=wxID_FRAMECADASTROEMPRESACAMPONOMERESPOSAVEL,
-              name=u'campoNomeResposavel', parent=self.abaContato,
+        self.campoNomeResponsavel = wx.TextCtrl(id=wxID_FRAMECADASTROEMPRESACAMPONOMERESPONSAVEL,
+              name=u'campoNomeResponsavel', parent=self.abaContato,
               pos=wx.Point(24, 37), size=wx.Size(496, 21), style=0, value=u'')
-        self.campoNomeResposavel.SetMaxLength(50)
+        self.campoNomeResponsavel.SetMaxLength(50)
 
         self.campoEmail = wx.TextCtrl(id=wxID_FRAMECADASTROEMPRESACAMPOEMAIL,
               name=u'campoEmail', parent=self.abaContato, pos=wx.Point(24, 94),
@@ -375,6 +376,14 @@ class frameCadastroEmpresa(wx.Frame):
               pos=wx.Point(24, 147), size=wx.Size(312, 21),
               style=wx.TE_PASSWORD, value=u'')
 
+        self.nomeErroSenha = wx.StaticText(id=wxID_FRAMECADASTROEMPRESANOMEERROSENHA,
+              label=u'', name=u'nomeErroSenha', parent=self.abaLogin,
+              pos=wx.Point(541, 36), size=wx.Size(0, 13),
+              style=wx.ALIGN_CENTRE)
+        self.nomeErroSenha.SetFont(wx.Font(8, wx.SWISS, wx.NORMAL, wx.NORMAL,
+              True, u'Tahoma'))
+        self.nomeErroSenha.SetAutoLayout(True)
+
         self._init_coll_dadosDosAlunos_Pages(self.dadosDosAlunos)
 
     def __init__(self, parent):
@@ -473,11 +482,35 @@ class frameCadastroEmpresa(wx.Frame):
         event.Skip()
 
     def OnBotaoLimparEmpresarialButton(self, event):
+        self.campoCNPJ.SetValue('')
+        self.campoRazaoSocial.SetValue('')
+        self.campoNomeFantasia.SetValue('')
+        self.campoCEP.SetValue('')
+        self.campoNumero.SetValue('')
+        self.campoComplemento.SetValue('')
+        self.campoEndereco.SetValue('')
+        self.campoBairro.SetValue('')
+        self.campoCidade.SetValue('')
+        self.campoUF.SetValue('')
+        self.nomeErro.SetLabel('')
+        
+        event.Skip()
+
+
+    def OnBotaoLimparLoginButton(self, event):
+        self.campoLogin.SetValue('')
+        self.campoSenha.SetValue('')
+        self.campoConfirmarSenha.SetValue('')
+        self.nomeErroSenha.SetLabel('')
+        
         event.Skip()
 
     def OnBotaoLimparContatoButton(self, event):
-        event.Skip()
-
-    def OnBotaoLimparLoginButton(self, event):
+        self.campoNomeResponsavel.SetValue('')
+        self.campoEmail.SetValue('')
+        self.campoSite.SetValue('')
+        self.campoTelefone.SetValue('')
+        self.campoCelular.SetValue('')
+        
         event.Skip()
 
