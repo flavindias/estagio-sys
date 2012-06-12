@@ -650,7 +650,12 @@ class frameCadastroAluno(wx.Frame):
         #Primeiro Declaro todo mundo:
         self.__cpf              =self.campoCPF.GetValue()
         self.__data_nascimento  =self.campoAniversario.GetValue()
-        self.__sexo             =self.selecionaSexo #o sexo tem que receber 0 ou 1 mas nao sei como faz com o choice, procura na bibioteca do wx
+
+        if self.selecionaSexo.GetStringSelection() == 'Feminino':
+            self.__sexo = 0
+        else:
+            self.__sexo = 1
+            
         self.__nome             =self.campoNomeAluno.GetValue()
         self.__mae              =self.campoNomeMae.GetValue()
         self.__pai              =self.campoNomePai.GetValue()
@@ -669,16 +674,35 @@ class frameCadastroAluno(wx.Frame):
         self.__departamento     =self.comboBoxDepartamento.GetValue() #nao sei fazer fazer com esse tambem mas tem que tranformar em alguma string para entrar no banco
         self.__curso            =self.comboBoxCursos.GetValue() #nao sei fazer tambem, mas eh string
         self.__ano_conclusao    =self.campoAnoConclusao.GetValue()
-        self.__estagiando       =self.verificarEstagio #nao sei mas eh no mesmo esquema
-        self.__manha            =self.opcaoManha #nao sei (0 ou 1)
-        self.__tarde            =self.opcaoTarde #nao sei (0 ou 1) tambem
-        self.__noite            =self.opcaoNoite #nao sei tambem (0 ou 1)
+        
+        
+        if self.verificarEstagio.GetStringSelection() == 'Sim':
+            self.__estagiando = 1
+        else:
+            self.__estagiando = 0
+            
+        if self.opcaoManha.GetValue() == False:
+            self.__manha = 0
+        else:
+            self.__manha = 1
+            
+        
+        if self.opcaoTarde.GetValue() == False:
+            self.__tarde = 0
+        else:
+            self.__tarde = 1
+            
+        if self.opcaoNoite.GetValue() == False:
+            self.__noite = 0
+        else:
+            self.__noite = 1
         self.__email            =self.campoEmail.GetValue()
         if self.__email == '':
             self.__email= None
         self.__telefone         =self.campoTelefone.GetValue()
         self.__celular          =self.campoCelular.GetValue()
         self.__senha            =self.campoSenha.GetValue()
+        
         #DEPOIS DE DECLARAR TODO MUNDO EU INSIRO PELA FUNCAO
         Db.createAluno(self.__cpf , self.__data_nascimento, self.__sexo, self.__nome, self.__mae, self.__cep,\
                 self.__numero, self.__endereco, self.__bairro, self.__cidade, self.__uf, self.__matricula, \
