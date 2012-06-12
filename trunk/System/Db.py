@@ -81,9 +81,9 @@ def createAluno(cpf , data_nascimento, sexo, nome, mae, cep,\
     cursor.execute("INSERT INTO Aluno(cpf, data_nascimento, sexo, nome, mae, pai, cep, \
                     numero, complemento, endereco, bairro, cidade, uf, matricula, departamento, \
                     curso, ano_conclusao, estagiando, manha, tarde, noite, email, telefone, \
-                    celular, senha) VALUES ('%s', '%s', '%s', '%s', '%s', pai, '%s', \
-                    '%s', complemento, '%s', '%s', '%s', '%s', '%s', '%s', \
-                    '%s', '%s', '%s', manha, tarde, noite, email, '%s', \
+                    celular, senha) VALUES ('%s', '%s', '%s', '%s', '%s', NULL, '%s', \
+                    '%s', NULL, '%s', '%s', '%s', '%s', '%s', '%s', \
+                    '%s', '%s', '%s', NULL, NULL, NULL, NULL, '%s', \
                     '%s', '%s')  ; " %(str(cpf), str(data_nascimento), str(sexo), str(nome), str(mae), str(cep), \
                     str(numero), str(endereco), str(bairro), str(cidade), str(uf), str(matricula), str(departamento), \
                     str(curso), str(ano_conclusao), str(estagiando), str(telefone), \
