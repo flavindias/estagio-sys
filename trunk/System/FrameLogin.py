@@ -35,7 +35,7 @@ class frameLogin(wx.Frame):
         self.panelLogin.SetBackgroundColour(wx.Colour(255, 255, 255))
 
         self.logoIFPE = wx.StaticBitmap(bitmap=wx.Bitmap(u'./Graficos/logo.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_FRAMELOGINLOGOIFPE, name=u'logoIFPE',
+              wx.BITMAP_TYPE_PNG), id=wxID_FRAMELOGINLOGOIFPE, name=u'logo',
               parent=self.panelLogin, pos=wx.Point(8, 8), size=wx.Size(175, 70),
               style=0)
 
