@@ -117,3 +117,12 @@ def alteraFuncionario():
 
 def alteraEmpresa():
     pass
+
+def buscaAluno():
+    pass
+
+def buscaFuncionario():
+    pass
+
+def buscaEmpresa():
+    pass

@@ -10,6 +10,7 @@ import urllib
 import cgi
 import bridge
 import Db #IMPORTA O BANCO
+import MySQLdb
 
 def create(parent):
     return frameCadastroAluno(parent)
@@ -648,75 +649,73 @@ class frameCadastroAluno(wx.Frame):
 
         #Inserção no banco
         #Primeiro Declaro todo mundo:
-        self.__cpf              =self.campoCPF.GetValue()
-        self.__data_nascimento  =self.campoAniversario.GetValue()
+        try:
+            self.__cpf              =self.campoCPF.GetValue()
+            self.__data_nascimento  =self.campoAniversario.GetValue()
 
-        if self.selecionaSexo.GetStringSelection() == 'Feminino':
-            self.__sexo = 0
-        else:
-            self.__sexo = 1
+            if self.selecionaSexo.GetStringSelection() == 'Feminino':
+                self.__sexo = 0
+            else:
+                self.__sexo = 1
+                
+            self.__nome             =self.campoNomeAluno.GetValue()
+            self.__mae              =self.campoNomeMae.GetValue()
+            self.__pai              =self.campoNomePai.GetValue()
+            if self.__pai=='': #caso seja vazio
+                self.pai = None
+            self.__cep              =self.campoCEP.GetValue()
+            self.__numero           =self.campoNumero.GetValue()
+            self.__complemento      =self.campoComplemento.GetValue()
+            if self.__complemento=='':
+                self.__complemento= None
+            self.__endereco         =self.campoEndereco.GetValue()
+            self.__bairro           =self.campoBairro.GetValue()
+            self.__cidade           =self.campoCidade.GetValue()
+            self.__uf               =self.campoUF.GetValue()
+            self.__matricula        =self.campoMatricula.GetValue()
+            self.__departamento     =self.comboBoxDepartamento.GetValue() #nao sei fazer fazer com esse tambem mas tem que tranformar em alguma string para entrar no banco
+            self.__curso            =self.comboBoxCursos.GetValue() #nao sei fazer tambem, mas eh string
+            self.__ano_conclusao    =self.campoAnoConclusao.GetValue()
             
-        self.__nome             =self.campoNomeAluno.GetValue()
-        self.__mae              =self.campoNomeMae.GetValue()
-        self.__pai              =self.campoNomePai.GetValue()
-        if self.__pai=='': #caso seja vazio
-            self.pai = None
-        self.__cep              =self.campoCEP.GetValue()
-        self.__numero           =self.campoNumero.GetValue()
-        self.__complemento      =self.campoComplemento.GetValue()
-        if self.__complemento=='':
-            self.__complemento= None
-        self.__endereco         =self.campoEndereco.GetValue()
-        self.__bairro           =self.campoBairro.GetValue()
-        self.__cidade           =self.campoCidade.GetValue()
-        self.__uf               =self.campoUF.GetValue()
-        self.__matricula        =self.campoMatricula.GetValue()
-        self.__departamento     =self.comboBoxDepartamento.GetValue() #nao sei fazer fazer com esse tambem mas tem que tranformar em alguma string para entrar no banco
-        self.__curso            =self.comboBoxCursos.GetValue() #nao sei fazer tambem, mas eh string
-        self.__ano_conclusao    =self.campoAnoConclusao.GetValue()
-        
-        
-        if self.verificarEstagio.GetStringSelection() == 'Sim':
-            self.__estagiando = 1
-        else:
-            self.__estagiando = 0
             
-        if self.opcaoManha.GetValue() == False:
-            self.__manha = 0
-        else:
-            self.__manha = 1
+            if self.verificarEstagio.GetStringSelection() == 'Sim':
+                self.__estagiando = 1
+            else:
+                self.__estagiando = 0
+                
+            if self.opcaoManha.GetValue() == False:
+                self.__manha = 0
+            else:
+                self.__manha = 1
+                
             
-        
-        if self.opcaoTarde.GetValue() == False:
-            self.__tarde = 0
-        else:
-            self.__tarde = 1
+            if self.opcaoTarde.GetValue() == False:
+                self.__tarde = 0
+            else:
+                self.__tarde = 1
+                
+            if self.opcaoNoite.GetValue() == False:
+                self.__noite = 0
+            else:
+                self.__noite = 1
+            self.__email            =self.campoEmail.GetValue()
+            if self.__email == '':
+                self.__email= None
+            self.__telefone         =self.campoTelefone.GetValue()
+            self.__celular          =self.campoCelular.GetValue()
+            self.__senha            =self.campoSenha.GetValue()
             
-        if self.opcaoNoite.GetValue() == False:
-            self.__noite = 0
-        else:
-            self.__noite = 1
-        self.__email            =self.campoEmail.GetValue()
-        if self.__email == '':
-            self.__email= None
-        self.__telefone         =self.campoTelefone.GetValue()
-        self.__celular          =self.campoCelular.GetValue()
-        self.__senha            =self.campoSenha.GetValue()
+            #DEPOIS DE DECLARAR TODO MUNDO EU INSIRO PELA FUNCAO
+            Db.createAluno(self.__cpf , self.__data_nascimento, self.__sexo, self.__nome, self.__mae, self.__cep,\
+                    self.__numero, self.__endereco, self.__bairro, self.__cidade, self.__uf, self.__matricula, \
+                    self.__departamento , self.__curso, self.__ano_conclusao,\
+                    self.__estagiando, self.__telefone, self.__celular, self.__senha, pai = self.__pai, \
+                    complemento = self.__complemento, email= self.__email, manha = self.__manha, tarde = self.__tarde, noite = self.__noite)
+        except MySQLdb.Error, e:
+            self.ShowMessage(str(e[1]), str(e[0]))
+        # e fim... A nao ser que dê algum erro ai vc tem que tratar
+
         
-        #DEPOIS DE DECLARAR TODO MUNDO EU INSIRO PELA FUNCAO
-        Db.createAluno(self.__cpf , self.__data_nascimento, self.__sexo, self.__nome, self.__mae, self.__cep,\
-                self.__numero, self.__endereco, self.__bairro, self.__cidade, self.__uf, self.__matricula, \
-                self.__departamento , self.__curso, self.__ano_conclusao,\
-                self.__estagiando, self.__telefone, self.__celular, self.__senha, pai = self.__pai, \
-                complemento = self.__complemento, email= self.__email, manha = self.__manha, tarde = self.__tarde, noite = self.__noite)
-
-        # e fim... A nao ser que dê algum erro ai vc tem que tratar.
-
-
-
-
-
-
         event.Skip()
 
     def OnBotaoLimparContatoButton(self, event):
@@ -727,3 +726,8 @@ class frameCadastroAluno(wx.Frame):
         self.campoConfirmarSenha.SetValue('')
         event.Skip()
 
+
+
+    def ShowMessage(self, msg, erro):
+        wx.MessageBox('Erro:'+msg, erro, 
+            wx.OK | wx.ICON_INFORMATION)
